@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <stdbool.h>
+#include <math.h>
 
 struct term {
 	int coeff;
@@ -85,9 +86,26 @@ bool poly_equal(const polynomial *a, const polynomial *b)
 	return val;
 }
 
+double poly_eval(const polynomial *p, double x)
+{
+	double raised; 
+	int num;
+	double sum = 0.0;
+	while(p->next != NULL)
+	{
+		if(p->exp > 0){
+			raised = (double) p->exp;
+		}
+		num = p->coeff;
+		p = p->next;
+		sum += (num*(pow(x, raised)));
+	}
+	return sum;
+}
 
 void main ()
 {
+	double y = 3;
 	polynomial * poly1 = NULL;
 	polynomial * poly2 = NULL;
 	term_create(1, 3, &poly1);
@@ -100,4 +118,5 @@ void main ()
 	bool value = poly_equal(poly1, poly2);
 	printf("%d\n", value);
 	//poly_equal(poly1, poly2);
+	printf("sum %lf\n", poly_eval(poly1, y));
 }
