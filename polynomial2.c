@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 struct term {
 	int coeff;
@@ -58,23 +59,45 @@ char *poly_to_string(const polynomial *p)
 		sprintf(buffer, "%dx^%d", p->coeff, p->exp);
 		strcat(str, buffer);
 		p = p->next;
-//		free(buffer);
-		//buffer = "\0";
-		if(p->next != NULL){
+		if(p -> next != NULL){
 			strcat(str, sign);
 		}
 	}
-	//free(buffer);
+	free(buffer);
 	return str;
 	
 }
 
+bool poly_equal(const polynomial *a, const polynomial *b)
+{
+	bool val = true;
+	while(a->next != NULL  || b->next != NULL)
+	{
+		if((a->coeff == b->coeff) && (a->exp == b->exp)){
+			val = true;  //printf("%d and b coeff is %d\n", a->coeff, b->coeff);
+		}else{
+			val = false;
+			break;
+		}
+		a = a->next;
+		b = b->next;
+	}
+	return val;
+}
+
+
 void main ()
 {
 	polynomial * poly1 = NULL;
+	polynomial * poly2 = NULL;
 	term_create(1, 3, &poly1);
 	term_create(5, 6, &poly1);
-	term_create(2, 4, &poly1);
+	term_create(1, 3, &poly2);
+	term_create(5, 6, &poly2);
 	poly_print(poly1);
 	printf("%s\n", poly_to_string(poly1));
+	//bool value = true;
+	bool value = poly_equal(poly1, poly2);
+	printf("%d\n", value);
+	//poly_equal(poly1, poly2);
 }
