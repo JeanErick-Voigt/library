@@ -117,3 +117,51 @@ void triple(struct term *p)
 	//printf("\n");
 }
 
+polynomial *poly_add(const polynomial *a, const polynomial *b)
+{
+	polynomial *polySum = malloc(sizeof(polynomial));
+	while(a->next != NULL && b->next != NULL)
+	{	
+		if(a->exp > b->exp)
+		{
+			polySum->exp = a->exp;
+			polySum->coeff = a->coeff;
+			a = a->next;
+		}
+		else if(a->exp < b->exp)
+		{
+			polySum->exp = b->exp;;
+			polySum->coeff = a->coeff;
+			a = a->next;
+		}else{
+			polySum->exp = b->exp;
+			polySum->coeff = a->coeff + b->coeff;
+			a = a->next;
+			b = b->next;
+		}
+		polySum->next = malloc(sizeof(polynomial));
+		polySum = polySum->next;
+		polySum->next = NULL;
+	}
+	while(a->next != NULL || b->next != NULL)
+	{
+		if(a->next)
+		{
+			polySum->exp = a->exp;
+			polySum->coeff = a->coeff;
+			a = a->next;
+		}
+		if(b->next)
+		{
+			polySum->exp = b->exp;
+			polySum->coeff = b->exp;
+			b = b->next;
+		}
+		polySum->next = malloc (sizeof(polynomial));
+		polySum = polySum->next;
+		polySum->next = NULL;
+	}
+	return polySum;
+
+}
+
