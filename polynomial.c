@@ -176,4 +176,10 @@ polynomial *poly_multi(const polynomial * a, const polynomial b)
 }
 
 
-
+//polynomial *poly_pow(const polynomial *a, unsigned int e)
+//{
+//	while(a->next != NULL)
+//	{
+		//use pow() library to make this work
+//	}
+//}
