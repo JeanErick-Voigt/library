@@ -121,7 +121,7 @@ polynomial *poly_add(const polynomial *a, const polynomial *b)
 {
 	polynomial *polySum = malloc(sizeof(polynomial));
 	while(a->next != NULL && b->next != NULL)
-	{	
+	{
 		if(a->exp > b->exp)
 		{
 			polySum->exp = a->exp;
@@ -164,4 +164,16 @@ polynomial *poly_add(const polynomial *a, const polynomial *b)
 	return polySum;
 
 }
+
+polynomial *poly_multi(const polynomial * a, const polynomial b)
+{
+	while(a->next != NULL)
+	{
+		a->coeff *= b;
+		a = a->next;
+	}
+	return a;
+}
+
+
 
