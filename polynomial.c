@@ -1,9 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
+//#include <stdbool.h>
 #include <math.h>
 #include "polynomial.h"
+
 
 void term_create(int coeff, unsigned int exp, polynomial **eqPtr)
 {
@@ -57,7 +58,6 @@ char *poly_to_string(const polynomial *p)
 			strcat(str, sign);
 		}
 	}
-	free(buffer);
 	return str;
 	
 }
@@ -108,72 +108,68 @@ void poly_iterate(polynomial *p, void(*transform)(struct term *p))
 void triple(struct term *p)
 {
 	
-	while (p->next != NULL)
-	{
+
 		p->coeff *= 3;
-		//printf("coeff %d", p->coeff);
-		p = p->next;
-	}
-	//printf("\n");
-}
-
-polynomial *poly_add(const polynomial *a, const polynomial *b)
-{
-	polynomial *polySum = malloc(sizeof(polynomial));
-	while(a->next != NULL && b->next != NULL)
-	{
-		if(a->exp > b->exp)
-		{
-			polySum->exp = a->exp;
-			polySum->coeff = a->coeff;
-			a = a->next;
-		}
-		else if(a->exp < b->exp)
-		{
-			polySum->exp = b->exp;;
-			polySum->coeff = a->coeff;
-			a = a->next;
-		}else{
-			polySum->exp = b->exp;
-			polySum->coeff = a->coeff + b->coeff;
-			a = a->next;
-			b = b->next;
-		}
-		polySum->next = malloc(sizeof(polynomial));
-		polySum = polySum->next;
-		polySum->next = NULL;
-	}
-	while(a->next != NULL || b->next != NULL)
-	{
-		if(a->next)
-		{
-			polySum->exp = a->exp;
-			polySum->coeff = a->coeff;
-			a = a->next;
-		}
-		if(b->next)
-		{
-			polySum->exp = b->exp;
-			polySum->coeff = b->exp;
-			b = b->next;
-		}
-		polySum->next = malloc (sizeof(polynomial));
-		polySum = polySum->next;
-		polySum->next = NULL;
-	}
-	return polySum;
 
 }
 
-polynomial *poly_multi(const polynomial * a, const polynomial b)
-{
-	while(a->next != NULL)
-	{
-		a->coeff *= b;
-		a = a->next;
-	}
-	return a;
-}
+//polynomial *poly_add(const polynomial *a, const polynomial *b)
+//{
+//	polynomial *polySum = malloc(sizeof(polynomial));
+//	while(a->next != NULL && b->next != NULL)
+//	{
+//		if(a->exp > b->exp)
+//		{
+//			polySum->exp = a->exp;
+//			polySum->coeff = a->coeff;
+//			a = a->next;
+//		}
+//		else if(a->exp < b->exp)
+//		{
+//			polySum->exp = b->exp;;
+//			polySum->coeff = a->coeff;
+//			a = a->next;
+//		}else{
+//			polySum->exp = b->exp;
+//			polySum->coeff = a->coeff + b->coeff;
+//			a = a->next;
+//			b = b->next;
+//		}
+//		polySum->next = malloc(sizeof(polynomial));
+//		polySum = polySum->next;
+//		polySum->next = NULL;
+//	}
+//	while(a->next != NULL || b->next != NULL)
+//	{
+//		if(a->next)
+//		{
+//			polySum->exp = a->exp;
+//			polySum->coeff = a->coeff;
+//			a = a->next;
+//		}
+//		if(b->next)
+//		{
+//			polySum->exp = b->exp;
+//			polySum->coeff = b->exp;
+//			b = b->next;
+//		}
+//		polySum->next = malloc (sizeof(polynomial));
+//		polySum = polySum->next;
+//		polySum->next = NULL;
+//	}
+//	return polySum;
+
+//}
+
+//polynomial *poly_multi(const polynomial * a, const polynomial b)
+//{
+//	while(a->next != NULL)
+//	{
+//		a->coeff *= b;
+//		a = a->next;
+//	}
+//	return a;
+//}
 
 
 //polynomial *poly_pow(const polynomial *a, unsigned int e)
