@@ -1,0 +1,29 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+struct term {
+	int coeff;
+	unsigned int exp;
+	struct term *next;
+};
+
+typedef struct term polynomial;
+
+polynomial *term_create(int coeff, unsigned int exp)
+{
+	polynomial *node = malloc(sizeof(polynomial));
+	if (node){
+		node->coeff = coeff;
+		node->exp = exp;
+		node->next = NULL;
+	}
+	return node;
+}
+
+void main ()
+{
+	polynomial *TermA = term_create(1, 3);
+	
+	printf("%d\n", TermA->coeff);
+	printf("%d\n", TermA->exp);
+}
